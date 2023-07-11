@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SingUp from "./components/pages/singup/styled";
+import SingUp from "./components/pages/singup";
 
 const App = () => {
   return (
