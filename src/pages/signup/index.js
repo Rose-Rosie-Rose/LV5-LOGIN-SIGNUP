@@ -17,38 +17,38 @@ const SignUpPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // 기본 동작인 페이지 새로고침 방지
+    
+      try {
+        const response = await fetch("http://3.38.191.164/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: formValues.email,
+            password: formValues.password,
+          }),
+          credentials: "same-origin", // 동일한 출처에서만 쿠키를 전송하도록 설정
+        });
 
-    try {
-      const response = await fetch("http://3.38.191.164/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: formValues.email,
-          password: formValues.password,
-        }),
-        credentials: "same-origin", // 동일한 출처에서만 쿠키를 전송하도록 설정
-      });
+        console.log("서버 응답:", response);
 
-      console.log("서버 응답:", response);
-
-      if (response.ok) {
-        console.log("서버와의 연결이 성공적으로 이뤄졌습니다.");
-        navigate("/signin", { replace: true });
-      } else {
-        const responseData = await response.json();
-        console.log("오류 응답 데이터:", responseData);
-
-        if (responseData.message === "이미 존재하는 유저 id입니다.") {
-          alert("이미 사용 중인 아이디입니다.");
+        if (response.ok) {
+          console.log("서버와의 연결이 성공적으로 이뤄졌습니다.");
+          navigate("/signin", { replace: true });
         } else {
-          console.log("서버와의 연결에 문제 발생");
+          const responseData = await response.json();
+          console.log("오류 응답 데이터:", responseData);
+
+          if (responseData.message === "이미 존재하는 유저 id입니다.") {
+            alert("이미 사용 중인 아이디입니다.");
+          } else {
+            console.log("서버와의 연결에 문제 발생");
+          }
         }
+      } catch (error) {
+        console.log("서버와의 연결 중 오류 발생", error);
       }
-    } catch (error) {
-      console.log("서버와의 연결 중 오류 발생", error);
-    }
   };
 
   return (
