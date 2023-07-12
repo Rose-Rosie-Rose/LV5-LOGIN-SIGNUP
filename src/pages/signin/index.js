@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SingInPage = () => {
+const SignInPage = () => {
   const navigate = useNavigate();
   const [formValues, setFormValue] = useState({
     email: "",
@@ -63,4 +63,4 @@ const SingInPage = () => {
   );
 };
 
-export default SingInPage;
+export default SignInPage;
