@@ -1,5 +1,5 @@
-const SingIn = () => {
+const SingInPage = () => {
   return <>SingIn</>
 }
 
-export default SingIn
+export default SingInPage
